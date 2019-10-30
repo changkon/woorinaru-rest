@@ -1,15 +1,13 @@
 package woorinaru.rest.dto.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import woorinaru.rest.dto.management.administration.Resource;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public abstract class User {
 
@@ -17,7 +15,9 @@ public abstract class User {
     protected String name;
     protected String nationality;
     protected String email;
-    protected Collection<Resource> favouriteResources;
+
+    @JsonFormat(with=JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    protected Collection<Integer> favouriteResources;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -46,7 +46,7 @@ public abstract class User {
         return email;
     }
 
-    public Collection<Resource> getFavouriteResources() {
+    public Collection<Integer> getFavouriteResources() {
         return favouriteResources;
     }
 
@@ -62,7 +62,7 @@ public abstract class User {
         this.email = email;
     }
 
-    public void setFavouriteResources(Collection<Resource> favouriteResources) {
+    public void setFavouriteResources(Collection<Integer> favouriteResources) {
         this.favouriteResources = favouriteResources;
     }
 

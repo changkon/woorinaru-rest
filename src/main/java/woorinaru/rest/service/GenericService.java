@@ -1,5 +1,7 @@
 package woorinaru.rest.service;
 
+import woorinaru.core.command.UpdateCommand;
+
 import java.util.List;
 import java.util.Optional;
 
