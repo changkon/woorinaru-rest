@@ -32,8 +32,10 @@ public class AdminRestController {
         this.adminService.create(admin);
     }
 
-    @DeleteMapping
-    public void delete(@RequestBody Admin admin) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable int id) {
+        Admin admin = new Admin();
+        admin.setId(id);
         this.adminService.delete(admin);
     }
 
