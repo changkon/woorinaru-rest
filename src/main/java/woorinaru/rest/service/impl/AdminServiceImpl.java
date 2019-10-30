@@ -2,6 +2,7 @@ package woorinaru.rest.service.impl;
 
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
+import woorinaru.core.command.UpdateCommand;
 import woorinaru.rest.dto.user.Admin;
 import woorinaru.rest.mapper.user.AdminMapper;
 import woorinaru.rest.service.AdminService;
@@ -55,8 +56,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    @Transactional
     public void modify(Admin admin) {
-
+        AdminMapper mapper = Mappers.getMapper(AdminMapper.class);
+        woorinaru.core.model.user.Admin adminModel = mapper.mapToModel(admin);
+        this.adminService.modify(adminModel);
     }
 
     @Override

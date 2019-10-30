@@ -37,4 +37,9 @@ public class AdminRestController {
         this.adminService.delete(admin);
     }
 
+    @PutMapping
+    public void modify(@RequestBody Admin admin) {
+        this.adminService.modify(admin);
+    }
+
 }
