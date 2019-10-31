@@ -1,20 +1,15 @@
 package woorinaru.rest.service.impl;
 
 import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import woorinaru.core.command.UpdateCommand;
+import org.springframework.transaction.annotation.Transactional;
 import woorinaru.rest.dto.user.Admin;
 import woorinaru.rest.mapper.user.AdminMapper;
 import woorinaru.rest.service.AdminService;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -22,29 +17,23 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private woorinaru.core.service.AdminService adminService;
 
-    @Autowired
-    private EntityManager em;
-
     public AdminServiceImpl() {}
 
     @Override
     @Transactional
-    public void create(Admin admin) {
+    public int create(Admin admin) {
         AdminMapper mapper = Mappers.getMapper(AdminMapper.class);
         woorinaru.core.model.user.Admin adminModel = mapper.mapToModel(admin);
-        this.adminService.create(adminModel);
+        return this.adminService.create(adminModel);
     }
 
     @Override
     @Transactional
-    public Optional<Admin> get(int id) {
-        Optional<woorinaru.core.model.user.Admin> adminModelOptional = this.adminService.get(id);
-        Optional<Admin> adminDtoOptional = Optional.empty();
-        if (adminModelOptional.isPresent()) {
-            AdminMapper mapper = Mappers.getMapper(AdminMapper.class);
-            adminDtoOptional = Optional.of(mapper.mapToDto(adminModelOptional.get()));
-        }
-        return adminDtoOptional;
+    public Admin get(int id) {
+        woorinaru.core.model.user.Admin adminModel = this.adminService.get(id);
+        AdminMapper mapper = AdminMapper.MAPPER;
+        Admin adminDto = mapper.mapToDto(adminModel);
+        return adminDto;
     }
 
     @Override
