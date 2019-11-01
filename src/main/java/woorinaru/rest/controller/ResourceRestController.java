@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import woorinaru.rest.dto.management.administration.Resource;
 import woorinaru.rest.service.ResourceService;
+import org.springframework.core.io.ByteArrayResource;
 
 import java.io.IOException;
 import java.net.URI;
@@ -18,18 +19,22 @@ public class ResourceRestController {
     @Autowired
     private ResourceService resourceService;
 
-//    @GetMapping("/description/{id}")
-//    public ResponseEntity<String> get(@PathVariable int id) {
-//        Resource resourceDto = this.resourceService.get(id);
-//        String description = resourceDto.getDescription();
-//
-//    }
-//
-//    @GetMapping("/file/{id}")
-//    public ResponseEntity<Resource> get(@PathVariable int id) {
-//        Resource resourceDto = this.resourceService.get(id);
-//
-//    }
+    @GetMapping("/description/{id}")
+    public ResponseEntity<String> getDescription(@PathVariable int id) {
+        Resource resourceDto = this.resourceService.get(id);
+        String description = resourceDto.getDescription();
+        return ResponseEntity.ok().body(description);
+    }
+
+    @GetMapping("/file/{id}")
+    public ResponseEntity<org.springframework.core.io.Resource> getFile(@PathVariable int id) {
+        Resource resourceDto = this.resourceService.get(id);
+        ByteArrayResource resource = new ByteArrayResource(resourceDto.getResource());
+        return ResponseEntity.ok()
+            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .contentLength(resource.contentLength())
+            .body(resource);
+    }
 
     @PostMapping(consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> create(@RequestParam("description") String description, @RequestParam("file") MultipartFile file) throws IOException {
@@ -38,15 +43,16 @@ public class ResourceRestController {
         resource.setDescription(description);
         resource.setResource(resourceBytes);
         int generatedId = this.resourceService.create(resource);
-        String uri = String.format("/woorinaru/api/resource/%d", generatedId);
+        String uri = String.format("/woorinaru/api/resource/file/%d", generatedId);
         return ResponseEntity.created(URI.create(uri)).build();
     }
 
     @PutMapping(consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> modify(@RequestParam("description") MultipartFile description, @RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<String> modify(@RequestParam("id") int id, @RequestParam("description") String description, @RequestParam("file") MultipartFile file) throws IOException {
         Resource resource = new Resource();
         String resourceDescription = new String(description.getBytes());
         byte[] resourceBytes = file.getBytes();
+        resource.setId(id);
         resource.setDescription(resourceDescription);
         resource.setResource(resourceBytes);
         this.resourceService.modify(resource);
