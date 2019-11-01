@@ -3,16 +3,16 @@ package woorinaru.rest.mapper.user;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import woorinaru.core.model.management.administration.Resource;
-import woorinaru.rest.dto.user.Admin;
+import woorinaru.rest.dto.user.Student;
 
 @Mapper
-public interface AdminMapper {
+public interface StudentMapper {
 
-    AdminMapper MAPPER = Mappers.getMapper(AdminMapper.class);
+    StudentMapper MAPPER = Mappers.getMapper(StudentMapper.class);
 
-    Admin mapToDto(woorinaru.core.model.user.Admin adminModel);
+    Student mapToDto(woorinaru.core.model.user.Student studentModel);
 
-    woorinaru.core.model.user.Admin mapToModel(Admin adminDto);
+    woorinaru.core.model.user.Student mapToModel(Student studentDto);
 
     default Integer mapToDto(Resource resourceModel) {
         return resourceModel.getId();
@@ -23,4 +23,5 @@ public interface AdminMapper {
         resourceModel.setId(integer);
         return resourceModel;
     }
+
 }
