@@ -28,4 +28,5 @@ module woorinaru.spring.rest {
     requires com.fasterxml.jackson.datatype.jsr310;
     requires com.fasterxml.jackson.datatype.jdk8;
     requires com.fasterxml.jackson.module.paramnames;
+    requires spring.core;
 }
