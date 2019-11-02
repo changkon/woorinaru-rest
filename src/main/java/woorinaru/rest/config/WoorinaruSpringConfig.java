@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import woorinaru.core.service.*;
 import woorinaru.repository.sql.dao.impl.AdminDaoImpl;
 import woorinaru.repository.sql.dao.impl.ResourceDaoImpl;
+import woorinaru.repository.sql.dao.impl.StaffDaoImpl;
 import woorinaru.repository.sql.dao.impl.StudentDaoImpl;
 
 import javax.persistence.EntityManager;
@@ -24,6 +25,13 @@ public class WoorinaruSpringConfig {
         AdminServiceImpl adminService = new AdminServiceImpl();
         adminService.setDao(new AdminDaoImpl(em));
         return adminService;
+    }
+
+    @Bean
+    public StaffService staffService(EntityManager em) {
+        StaffServiceImpl staffService = new StaffServiceImpl();
+        staffService.setDao(new StaffDaoImpl(em));
+        return staffService;
     }
 
     @Bean

@@ -22,7 +22,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public int create(Admin admin) {
-        AdminMapper mapper = Mappers.getMapper(AdminMapper.class);
+        AdminMapper mapper = AdminMapper.MAPPER;
         woorinaru.core.model.user.Admin adminModel = mapper.mapToModel(admin);
         return this.adminService.create(adminModel);
     }
@@ -39,7 +39,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public void delete(Admin admin) {
-        AdminMapper mapper = Mappers.getMapper(AdminMapper.class);
+        AdminMapper mapper = AdminMapper.MAPPER;
         woorinaru.core.model.user.Admin adminModel = mapper.mapToModel(admin);
         this.adminService.delete(adminModel);
     }
@@ -47,7 +47,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public void modify(Admin admin) {
-        AdminMapper mapper = Mappers.getMapper(AdminMapper.class);
+        AdminMapper mapper = AdminMapper.MAPPER;
         woorinaru.core.model.user.Admin adminModel = mapper.mapToModel(admin);
         this.adminService.modify(adminModel);
     }
@@ -56,7 +56,7 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public List<Admin> getAll() {
         List<woorinaru.core.model.user.Admin> adminModels = this.adminService.getAll();
-        AdminMapper mapper = Mappers.getMapper(AdminMapper.class);
+        AdminMapper mapper = AdminMapper.MAPPER;
         List<Admin> adminDtos = adminModels.stream()
             .map(mapper::mapToDto)
             .collect(Collectors.toList());
