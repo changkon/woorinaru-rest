@@ -58,4 +58,25 @@ public class WoorinaruSpringConfig {
         beginnerClassService.setDao(new BeginnerClassDaoImpl(em));
         return beginnerClassService;
     }
+
+    @Bean
+    public IntermediateClassService intermediateClassService(EntityManager em) {
+        IntermediateClassServiceImpl intermediateClassService = new IntermediateClassServiceImpl();
+        intermediateClassService.setDao(new IntermediateClassDaoImpl(em));
+        return intermediateClassService;
+    }
+
+    @Bean
+    public OutingClassService outingClassService(EntityManager em) {
+        OutingClassServiceImpl outingClassService = new OutingClassServiceImpl();
+        outingClassService.setDao(new OutingClassDaoImpl(em));
+        return outingClassService;
+    }
+
+    @Bean
+    public TutoringClassService tutoringClassService(EntityManager em) {
+        TutoringClassServiceImpl tutoringClassService = new TutoringClassServiceImpl();
+        tutoringClassService.setDao(new TutoringClassDaoImpl(em));
+        return tutoringClassService;
+    }
 }
