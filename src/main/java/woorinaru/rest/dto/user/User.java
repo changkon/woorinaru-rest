@@ -15,8 +15,6 @@ public abstract class User {
     protected String name;
     protected String nationality;
     protected String email;
-
-    @JsonFormat(with=JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     protected Collection<Integer> favouriteResources;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
