@@ -18,9 +18,9 @@ public interface StudentMapper {
         return resourceModel.getId();
     }
 
-    default Resource mapToModel(Integer integer) {
+    default Resource mapToModel(Integer id) {
         Resource resourceModel = new Resource();
-        resourceModel.setId(integer);
+        resourceModel.setId(id);
         return resourceModel;
     }
 

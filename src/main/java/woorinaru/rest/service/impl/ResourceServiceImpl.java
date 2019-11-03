@@ -26,6 +26,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    @Transactional
     public Resource get(int id) {
         woorinaru.core.model.management.administration.Resource resourceModel = this.resourceService.get(id);
         ResourceMapper mapper = ResourceMapper.MAPPER;
@@ -34,6 +35,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    @Transactional
     public void delete(Resource resource) {
         ResourceMapper mapper = ResourceMapper.MAPPER;
         woorinaru.core.model.management.administration.Resource resourceModel = mapper.mapToModel(resource);
@@ -41,6 +43,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    @Transactional
     public void modify(Resource resource) {
         ResourceMapper mapper = ResourceMapper.MAPPER;
         woorinaru.core.model.management.administration.Resource resourceModel = mapper.mapToModel(resource);
@@ -48,6 +51,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    @Transactional
     public List<Resource> getAll() {
         // not supported
         throw new UnsupportedOperationException("Cannot download all resource files");

@@ -3,10 +3,7 @@ package woorinaru.rest.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import woorinaru.core.service.*;
-import woorinaru.repository.sql.dao.impl.AdminDaoImpl;
-import woorinaru.repository.sql.dao.impl.ResourceDaoImpl;
-import woorinaru.repository.sql.dao.impl.StaffDaoImpl;
-import woorinaru.repository.sql.dao.impl.StudentDaoImpl;
+import woorinaru.repository.sql.dao.impl.*;
 
 import javax.persistence.EntityManager;
 
@@ -41,4 +38,24 @@ public class WoorinaruSpringConfig {
         return resourceService;
     }
 
+    @Bean
+    public TermService termService(EntityManager em) {
+        TermServiceImpl termService = new TermServiceImpl();
+        termService.setDao(new TermDaoImpl(em));
+        return termService;
+    }
+
+    @Bean
+    public EventService eventService(EntityManager em) {
+        EventServiceImpl eventService = new EventServiceImpl();
+        eventService.setDao(new EventDaoImpl(em));
+        return eventService;
+    }
+
+    @Bean
+    public BeginnerClassService beginnerClassService(EntityManager em) {
+        BeginnerClassServiceImpl beginnerClassService = new BeginnerClassServiceImpl();
+        beginnerClassService.setDao(new BeginnerClassDaoImpl(em));
+        return beginnerClassService;
+    }
 }
