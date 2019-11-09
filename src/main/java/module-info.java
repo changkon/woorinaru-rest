@@ -1,7 +1,7 @@
-module woorinaru.spring.rest {
+module com.woorinaru.spring.rest {
     // woorinaru models
-    requires woorinaru.core;
-    requires woorinaru.repository.sql;
+    requires com.woorinaru.core;
+    requires com.woorinaru.repository.sql;
     // JPA
     requires java.sql;
     requires java.persistence;

@@ -8,7 +8,7 @@
 		<version>2.2.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>woorinaru</groupId>
+	<groupId>com.woorinaru</groupId>
 	<artifactId>spring-rest</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>spring-rest</name>
@@ -41,13 +41,13 @@
 
         <!-- Woorinaru dependencies -->
         <dependency>
-            <groupId>woorinaru</groupId>
+            <groupId>com.woorinaru</groupId>
             <artifactId>core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>woorinaru</groupId>
+            <groupId>com.woorinaru</groupId>
             <artifactId>repository-sql</artifactId>
             <version>1.0-SNAPSHOT</version>
             <exclusions>
@@ -82,6 +82,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
+        <!-- Spring OAuth -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.3.7.RELEASE</version>
+        </dependency>
+
 
         <!-- data jpa -->
         <dependency>
