@@ -5,6 +5,7 @@ import com.woorinaru.core.model.user.User;
 import com.woorinaru.core.service.AdminService;
 import com.woorinaru.core.service.StaffService;
 import com.woorinaru.core.service.StudentService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -57,6 +58,16 @@ public class IdTokenUtil {
 
         if (resultList.isEmpty()) {
             Student studentModel = new Student();
+            studentModel.setEmail(email);
+
+            String name = (String) claims.getOrDefault(IdTokenClaimKeys.NAME, "");
+
+            if (!StringUtils.isEmpty(name)) {
+                studentModel.setName(name);
+            }
+
+            studentModel.setSignUpDateTime(LocalDateTime.now());
+
             int generatedId = studentService.create(studentModel);
             return studentService.get(generatedId);
         } else {
