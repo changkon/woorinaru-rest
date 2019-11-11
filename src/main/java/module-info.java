@@ -30,4 +30,8 @@ module com.woorinaru.spring.rest {
     requires com.fasterxml.jackson.module.paramnames;
     requires spring.core;
     requires jjwt;
+    requires google.api.client;
+    requires com.google.api.client.json.jackson2;
+    requires com.google.api.client;
+    requires org.apache.commons.lang3;
 }
