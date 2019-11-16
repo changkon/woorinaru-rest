@@ -98,7 +98,7 @@ public class JwtTokenUtilTest {
     }
 
     @Test
-    public void testValidateTokenReturnsFalse() {
+    public void testValidateTokenReturnsFalseWhenExpired() {
         // GIVEN
         long currentTimeMillis = System.currentTimeMillis();
         long expiryTimeMillis = currentTimeMillis - Duration.ofMinutes(1).toMillis();
@@ -119,7 +119,7 @@ public class JwtTokenUtilTest {
     }
 
     @Test
-    public void testValidateTokenReturnsTrue() {
+    public void testValidateTokenReturnsTrueWhenNotExpired() {
         // GIVEN
         long currentTimeMillis = System.currentTimeMillis();
         long expiryTimeMillis = currentTimeMillis + Duration.ofMinutes(1).toMillis();

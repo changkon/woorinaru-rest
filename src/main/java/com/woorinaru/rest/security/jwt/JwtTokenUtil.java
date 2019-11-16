@@ -33,6 +33,19 @@ public class JwtTokenUtil {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
+    public String getIssuerFromToken(String token) {
+        return getClaimFromToken(token, Claims::getIssuer);
+    }
+
+    public Role getRoleFromToken(String token) {
+        String role = getClaimFromToken(token, (claims) -> claims.get(JwtCustomClaims.ROLE_KEY, String.class));
+        return Role.fromRole(role);
+    }
+
+    public int getUserIdFromToken(String token) {
+        return getClaimFromToken(token, (claims) -> claims.get(JwtCustomClaims.USER_ID_KEY, Integer.class));
+    }
+
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
@@ -52,6 +65,10 @@ public class JwtTokenUtil {
         } catch (ExpiredJwtException e) {
             return true;
         }
+    }
+
+    public boolean isTokenIssuerWoorinaru(String token) {
+        return issuer.equals(getIssuerFromToken(token));
     }
 
     public String generateToken() {
@@ -76,6 +93,7 @@ public class JwtTokenUtil {
             User userModel = user.get();
             Role role = Role.fromUser(userModel);
             claims.put(JwtCustomClaims.ROLE_KEY, role.toString());
+            claims.put(JwtCustomClaims.USER_ID_KEY, userModel.getId());
         } else {
             claims.put(JwtCustomClaims.ROLE_KEY, Role.VISITOR.toString());
         }
@@ -83,7 +101,12 @@ public class JwtTokenUtil {
         return claims;
     }
 
+    /**
+     * Token is valid if it hasn't expired and it is issued by woorinaru
+     * @param token
+     * @return validity of token
+     */
     public boolean validateToken(String token) {
-        return !isTokenExpired(token);
+        return !isTokenExpired(token) && isTokenIssuerWoorinaru(token);
     }
 }

@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 @EnableWebSecurity
 @Profile("dev")
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+public class DevWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
