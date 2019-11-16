@@ -1,11 +1,9 @@
 package com.woorinaru.rest.filter;
 
-import com.woorinaru.core.model.role.Role;
+import com.woorinaru.core.model.security.Role;
 import com.woorinaru.core.model.user.User;
-import com.woorinaru.core.service.UserService;
 import com.woorinaru.core.service.UserServiceImpl;
 import com.woorinaru.rest.mapper.user.UserDetailsMapper;
-import com.woorinaru.rest.security.authentication.IdTokenUtil;
 import com.woorinaru.rest.security.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;

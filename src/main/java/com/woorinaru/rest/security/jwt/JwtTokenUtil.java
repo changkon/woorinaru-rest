@@ -1,6 +1,6 @@
 package com.woorinaru.rest.security.jwt;
 
-import com.woorinaru.core.model.role.Role;
+import com.woorinaru.core.model.security.Role;
 import com.woorinaru.core.model.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
