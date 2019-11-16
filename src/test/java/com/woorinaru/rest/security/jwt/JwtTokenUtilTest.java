@@ -1,17 +1,15 @@
 package com.woorinaru.rest.security.jwt;
 
-import com.woorinaru.core.model.role.Role;
+import com.woorinaru.core.model.security.Role;
 import com.woorinaru.core.model.user.Admin;
 import com.woorinaru.core.model.user.Staff;
 import com.woorinaru.core.model.user.Student;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 

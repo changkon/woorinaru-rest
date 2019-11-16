@@ -1,6 +1,6 @@
 package com.woorinaru.rest.mapper.user;
 
-import com.woorinaru.core.model.role.Role;
+import com.woorinaru.core.model.security.Role;
 import com.woorinaru.core.model.user.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
