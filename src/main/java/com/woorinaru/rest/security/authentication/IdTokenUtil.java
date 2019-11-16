@@ -1,10 +1,10 @@
 package com.woorinaru.rest.security.authentication;
 
+import com.woorinaru.core.exception.ResourceNotFoundException;
 import com.woorinaru.core.model.user.Student;
 import com.woorinaru.core.model.user.User;
-import com.woorinaru.core.service.AdminService;
-import com.woorinaru.core.service.StaffService;
 import com.woorinaru.core.service.StudentService;
+import com.woorinaru.core.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,9 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -26,10 +24,7 @@ public class IdTokenUtil {
     private IdTokenVerifier verifier;
 
     @Autowired
-    private AdminService adminService;
-
-    @Autowired
-    private StaffService staffService;
+    private UserService userService;
 
     @Autowired
     private StudentService studentService;
@@ -52,11 +47,9 @@ public class IdTokenUtil {
         String email = (String) claims.get(IdTokenClaimKeys.EMAIL);
 
         // 3. If no user exists, create if there is no existing user (always create lowest level user i.e. student)
-        Query query = entityManager.createQuery("SELECT u.ID, u.USER_TYPE FROM User u WHERE u.email=:email")
-            .setParameter("email", email);
-        List<Object[]> resultList = query.getResultList();
-
-        if (resultList.isEmpty()) {
+        try {
+            return this.userService.getByEmail(email);
+        } catch (ResourceNotFoundException e) {
             Student studentModel = new Student();
             studentModel.setEmail(email);
 
@@ -70,22 +63,6 @@ public class IdTokenUtil {
 
             int generatedId = studentService.create(studentModel);
             return studentService.get(generatedId);
-        } else {
-            Object[] queryResult = resultList.get(0);
-            // Provide defaults
-            int userId = (int) queryResult[0];
-            char userType = (char) queryResult[1];
-
-            // 4. Return user
-            switch (userType) {
-                case 'A':
-                    return adminService.get(userId);
-                case 'T':
-                    return staffService.get(userId);
-                case 'S':
-                default:
-                    return studentService.get(userId);
-            }
         }
     }
 

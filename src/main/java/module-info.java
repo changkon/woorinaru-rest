@@ -34,4 +34,7 @@ module com.woorinaru.spring.rest {
     requires com.google.api.client.json.jackson2;
     requires com.google.api.client;
     requires org.apache.commons.lang3;
+    requires org.apache.tomcat.embed.core;
+    requires spring.security.core;
+    requires spring.security.web;
 }

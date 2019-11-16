@@ -1,14 +1,21 @@
 package com.woorinaru.rest.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import com.woorinaru.core.service.*;
 import com.woorinaru.repository.sql.dao.impl.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
 
 @Configuration
 public class WoorinaruSpringConfig {
+
+    @Bean
+    public UserServiceImpl userService(EntityManager em) {
+        UserServiceImpl userService = new UserServiceImpl();
+        userService.setDao(new UserDaoImpl(em));
+        return userService;
+    }
 
     @Bean
     public StudentService studentService(EntityManager em) {
