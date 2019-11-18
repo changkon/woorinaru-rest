@@ -1,4 +1,4 @@
-module com.woorinaru.spring.rest {
+module com.woorinaru.rest {
     // woorinaru models
     requires com.woorinaru.core;
     requires com.woorinaru.repository.sql;
