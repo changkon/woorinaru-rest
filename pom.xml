@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.woorinaru</groupId>
-	<artifactId>spring-rest</artifactId>
+	<artifactId>rest</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>spring-rest</name>
-	<description>REST application for Woorinaru</description>
+	<name>rest</name>
+	<description>Spring REST application for Woorinaru</description>
 
 	<properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
