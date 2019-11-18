@@ -18,6 +18,7 @@ module com.woorinaru.spring.rest {
     requires spring.tx;
     requires spring.orm;
     requires spring.security.config;
+    requires spring.security.oauth2;
 
     requires java.annotation;
 
@@ -37,4 +38,5 @@ module com.woorinaru.spring.rest {
     requires org.apache.tomcat.embed.core;
     requires spring.security.core;
     requires spring.security.web;
+    requires org.apache.logging.log4j;
 }
