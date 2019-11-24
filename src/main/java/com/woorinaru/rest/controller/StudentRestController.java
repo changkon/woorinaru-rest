@@ -32,7 +32,7 @@ public class StudentRestController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('visitor')")
+    @PreAuthorize("hasAnyRole('admin', 'leader', 'vice_leader', 'sub_leader', 'visitor')")
     public ResponseEntity<String> create(@RequestBody Student student) {
         int generatedId = this.studentService.create(student);
         String uri = String.format("/woorinaru/api/student/%d", generatedId);
@@ -40,7 +40,7 @@ public class StudentRestController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('student')")
+    @PreAuthorize("hasAnyRole('admin', 'student')")
     public ResponseEntity<String> delete(@PathVariable int id) {
         Student student = new Student();
         student.setId(id);
@@ -49,7 +49,7 @@ public class StudentRestController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyRole('student')")
+    @PreAuthorize("hasAnyRole('admin', 'student')")
     public ResponseEntity<String> modify(@RequestBody Student student) {
         this.studentService.modify(student);
         return ResponseEntity.ok().build();
