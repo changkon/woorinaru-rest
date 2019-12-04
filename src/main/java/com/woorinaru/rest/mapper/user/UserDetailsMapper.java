@@ -23,6 +23,7 @@ public class UserDetailsMapper {
 //            .build();
         Role role = Role.fromUser(user);
         return IdTokenUserDetails.IdTokenUserDetailsBuilder.builder()
+            .id(user.getId())
             .username(user.getName())
             .withRoles(role.toString())
             .accountExpired(false)

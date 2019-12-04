@@ -40,7 +40,7 @@ public class StudentRestController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin', 'student')")
+    @PreAuthorize("hasAnyRole('admin', 'student') and @resourceOwnerPermissionEvaluator.hasPermissionExcludingRoles(#id, 'admin')")
     public ResponseEntity<String> delete(@PathVariable int id) {
         Student student = new Student();
         student.setId(id);
@@ -49,7 +49,7 @@ public class StudentRestController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyRole('admin', 'student')")
+    @PreAuthorize("hasAnyRole('admin', 'student') and @resourceOwnerPermissionEvaluator.hasPermissionExcludingRoles(#student.getId(), 'admin')")
     public ResponseEntity<String> modify(@RequestBody Student student) {
         this.studentService.modify(student);
         return ResponseEntity.ok().build();
