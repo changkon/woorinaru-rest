@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 public class IdTokenUserDetails implements UserDetails {
 
+    private int id;
     private String username;
     private Collection<? extends GrantedAuthority> authorities;
     private boolean isAccountNonExpired;
@@ -18,7 +19,8 @@ public class IdTokenUserDetails implements UserDetails {
     private boolean isCredentialsNonExpired;
     private boolean isEnabled;
 
-    private IdTokenUserDetails(String username, Collection<? extends GrantedAuthority> authorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+    private IdTokenUserDetails(int id, String username, Collection<? extends GrantedAuthority> authorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+        this.id = id;
         this.username = username;
         this.authorities = authorities;
         this.isAccountNonExpired = isAccountNonExpired;
@@ -62,7 +64,16 @@ public class IdTokenUserDetails implements UserDetails {
         return false;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public static class IdTokenUserDetailsBuilder {
+        private int id;
         private String username;
         private Collection<? extends GrantedAuthority> authorities;
         private boolean isAccountNonExpired;
@@ -74,6 +85,11 @@ public class IdTokenUserDetails implements UserDetails {
 
         public static IdTokenUserDetailsBuilder builder() {
             return new IdTokenUserDetailsBuilder();
+        }
+
+        public IdTokenUserDetailsBuilder id(int id) {
+            this.id = id;
+            return this;
         }
 
         public IdTokenUserDetailsBuilder username(String username) {
@@ -110,7 +126,7 @@ public class IdTokenUserDetails implements UserDetails {
         }
 
         public IdTokenUserDetails build() {
-            return new IdTokenUserDetails(this.username, this.authorities, this.isAccountNonExpired, this.isAccountNonLocked, this.isCredentialsNonExpired, this.isEnabled);
+            return new IdTokenUserDetails(this.id, this.username, this.authorities, this.isAccountNonExpired, this.isAccountNonLocked, this.isCredentialsNonExpired, this.isEnabled);
         }
 
     }
