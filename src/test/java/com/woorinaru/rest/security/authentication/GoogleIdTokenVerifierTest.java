@@ -1,9 +1,9 @@
 package com.woorinaru.rest.security.authentication;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-import org.hamcrest.Matchers;
+import com.woorinaru.rest.security.token.identity.GoogleIdTokenVerifier;
+import com.woorinaru.rest.security.token.identity.IdTokenClaimKeys;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;

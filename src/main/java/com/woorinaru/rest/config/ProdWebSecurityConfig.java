@@ -2,7 +2,7 @@ package com.woorinaru.rest.config;
 
 import com.woorinaru.rest.filter.JwtAuthenticationEntryPoint;
 import com.woorinaru.rest.filter.JwtAuthenticationFilter;
-import com.woorinaru.rest.userdetailsservice.JwtAuthenticationUserDetailsService;
+import com.woorinaru.rest.security.authentication.JwtAuthenticationUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;

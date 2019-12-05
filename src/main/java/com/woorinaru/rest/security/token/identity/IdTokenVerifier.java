@@ -1,4 +1,4 @@
-package com.woorinaru.rest.security.authentication;
+package com.woorinaru.rest.security.token.identity;
 
 import java.util.Map;
 import java.util.Optional;

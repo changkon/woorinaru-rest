@@ -1,4 +1,4 @@
-package com.woorinaru.rest.security.jwt;
+package com.woorinaru.rest.security.token.jwt;
 
 import com.woorinaru.core.model.security.Role;
 import com.woorinaru.core.model.user.User;

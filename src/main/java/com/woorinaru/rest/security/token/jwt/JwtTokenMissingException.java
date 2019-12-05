@@ -1,4 +1,4 @@
-package com.woorinaru.rest.security.jwt;
+package com.woorinaru.rest.security.token.jwt;
 
 import org.springframework.security.core.AuthenticationException;
 
