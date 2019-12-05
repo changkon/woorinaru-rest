@@ -1,6 +1,7 @@
 package com.woorinaru.rest;
 
 import com.woorinaru.rest.config.ProdWebSecurityConfig;
+import com.woorinaru.rest.config.StageWebSecurityConfig;
 import com.woorinaru.rest.config.WoorinaruSpringConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +11,7 @@ import com.woorinaru.rest.config.DevWebSecurityConfig;
 
 @SpringBootApplication
 @EntityScan(basePackages={"com.woorinaru.repository.sql.entity"})
-@Import({WoorinaruSpringConfig.class, DevWebSecurityConfig.class, ProdWebSecurityConfig.class})
+@Import({WoorinaruSpringConfig.class, DevWebSecurityConfig.class, StageWebSecurityConfig.class, ProdWebSecurityConfig.class})
 public class SpringRestApplication {
 
 	public static void main(String[] args) {

@@ -20,9 +20,9 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 import org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter;
 
 @EnableWebSecurity
-@Profile("prod")
+@Profile("stage")
 @EnableGlobalMethodSecurity(prePostEnabled=true)
-public class ProdWebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class StageWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -56,12 +56,13 @@ public class ProdWebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.addFilterBefore(tokenAuthenticationFilter(), RequestHeaderAuthenticationFilter.class);
     }
 
-    @Bean(name= BeanIds.AUTHENTICATION_MANAGER)
+    @Bean(name=BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
 
+    // TODO determine stackoverflow exception
     @Bean
     public AuthenticationProvider preAuthProvider() {
         PreAuthenticatedAuthenticationProvider provider = new PreAuthenticatedAuthenticationProvider();
