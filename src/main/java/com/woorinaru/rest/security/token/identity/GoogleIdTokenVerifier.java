@@ -1,4 +1,4 @@
-package com.woorinaru.rest.security.authentication;
+package com.woorinaru.rest.security.token.identity;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;

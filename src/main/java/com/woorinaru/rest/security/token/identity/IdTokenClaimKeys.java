@@ -1,4 +1,4 @@
-package com.woorinaru.rest.security.authentication;
+package com.woorinaru.rest.security.token.identity;
 
 /**
  * Specifies standard claims returned from an ID token. The claims list retrieved from https://openid.net/specs/openid-connect-core-1_0.html.

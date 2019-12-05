@@ -1,4 +1,4 @@
-package com.woorinaru.rest.security.authentication;
+package com.woorinaru.rest.security.token.identity;
 
 import com.woorinaru.core.exception.ResourceNotFoundException;
 import com.woorinaru.core.model.user.Student;

@@ -1,8 +1,8 @@
 package com.woorinaru.rest.service.impl;
 
 import com.woorinaru.core.model.user.User;
-import com.woorinaru.rest.security.authentication.IdTokenUtil;
-import com.woorinaru.rest.security.jwt.JwtTokenUtil;
+import com.woorinaru.rest.security.token.identity.IdTokenUtil;
+import com.woorinaru.rest.security.token.jwt.JwtTokenUtil;
 import com.woorinaru.rest.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

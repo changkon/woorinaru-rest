@@ -1,10 +1,10 @@
-package com.woorinaru.rest.userdetailsservice;
+package com.woorinaru.rest.security.authentication;
 
 import com.woorinaru.core.model.security.Role;
 import com.woorinaru.core.model.user.User;
 import com.woorinaru.core.service.UserServiceImpl;
 import com.woorinaru.rest.mapper.user.UserDetailsMapper;
-import com.woorinaru.rest.security.jwt.JwtTokenUtil;
+import com.woorinaru.rest.security.token.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;

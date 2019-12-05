@@ -1,4 +1,4 @@
-package com.woorinaru.rest.security.authentication;
+package com.woorinaru.rest.security.token.identity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
