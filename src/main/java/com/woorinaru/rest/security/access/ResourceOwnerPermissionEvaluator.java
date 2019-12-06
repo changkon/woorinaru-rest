@@ -18,7 +18,11 @@ public class ResourceOwnerPermissionEvaluator {
         if (roles != null) {
             Collection<String> roleCollection = List.of(roles);
             Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
-            boolean roleMatch = authorities.stream().anyMatch(auth -> roleCollection.contains(((GrantedAuthority) auth).getAuthority()));
+            boolean roleMatch = authorities.stream().anyMatch(auth -> {
+                // sanitize. Must remove ROLE_ prefix
+                String grantedRole = ((GrantedAuthority) auth).getAuthority().replaceFirst("ROLE_", "");
+                return roleCollection.contains(grantedRole);
+            });
             if (roleMatch) {
                 return true;
             }
