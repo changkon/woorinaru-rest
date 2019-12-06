@@ -2,9 +2,10 @@ package com.woorinaru.rest.security.authentication;
 
 import com.woorinaru.core.model.security.Role;
 import com.woorinaru.core.model.user.User;
-import com.woorinaru.core.service.UserServiceImpl;
 import com.woorinaru.rest.mapper.user.UserDetailsMapper;
+import com.woorinaru.rest.mapper.user.UserMapper;
 import com.woorinaru.rest.security.token.jwt.JwtTokenUtil;
+import com.woorinaru.rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +23,7 @@ public class JwtAuthenticationUserDetailsService implements AuthenticationUserDe
     private UserDetailsMapper userDetailsMapper;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Override
     public UserDetails loadUserDetails(PreAuthenticatedAuthenticationToken preAuthenticatedAuthenticationToken) throws UsernameNotFoundException {
@@ -43,9 +44,9 @@ public class JwtAuthenticationUserDetailsService implements AuthenticationUserDe
                 return userDetailsMapper.mapAnonymousUser();
             } else {
                 int userId = jwtTokenUtil.getUserIdFromToken(jwtToken);
-                User user = this.userService.get(userId);
-                this.userService.setUserContext(user);
-                return userDetailsMapper.map(user);
+                com.woorinaru.rest.dto.user.User userDto = this.userService.get(userId);
+                User userModel = UserMapper.MAPPER.mapToModel(userDto);
+                return userDetailsMapper.map(userModel);
             }
 
         } else {
@@ -69,11 +70,11 @@ public class JwtAuthenticationUserDetailsService implements AuthenticationUserDe
         this.userDetailsMapper = userDetailsMapper;
     }
 
-    public UserServiceImpl getUserService() {
+    public UserService getUserService() {
         return userService;
     }
 
-    public void setUserService(UserServiceImpl userService) {
+    public void setUserService(UserService userService) {
         this.userService = userService;
     }
 }
