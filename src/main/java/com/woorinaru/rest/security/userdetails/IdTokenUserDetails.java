@@ -31,7 +31,7 @@ public class IdTokenUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.authorities;
     }
 
     @Override
@@ -41,27 +41,27 @@ public class IdTokenUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return this.isAccountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return this.isAccountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return this.isCredentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return this.isEnabled;
     }
 
     public int getId() {
@@ -99,7 +99,7 @@ public class IdTokenUserDetails implements UserDetails {
 
         public IdTokenUserDetailsBuilder withRoles(String... roles) {
             List<GrantedAuthority> authorities = Stream.of(roles)
-                .map(role -> new SimpleGrantedAuthority(role))
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                 .collect(Collectors.toList());
             this.authorities = authorities;
             return this;
