@@ -125,3 +125,6 @@ secrets.yml
 
 mvnw
 mvnw.cmd
+
+# application properties
+**/resources/application*.properties
