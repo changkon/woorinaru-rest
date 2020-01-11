@@ -22,6 +22,16 @@ public abstract class User {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     protected LocalDateTime signUpDateTime;
 
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    protected LocalDateTime createDateTime;
+
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    protected LocalDateTime updateDateTime;
+
     public User() {}
 
     public int getId() {
@@ -70,5 +80,21 @@ public abstract class User {
 
     public void setSignUpDateTime(LocalDateTime signUpDateTime) {
         this.signUpDateTime = signUpDateTime;
+    }
+
+    public LocalDateTime getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(LocalDateTime createDateTime) {
+        this.createDateTime = createDateTime;
+    }
+
+    public LocalDateTime getUpdateDateTime() {
+        return updateDateTime;
+    }
+
+    public void setUpdateDateTime(LocalDateTime updateDateTime) {
+        this.updateDateTime = updateDateTime;
     }
 }

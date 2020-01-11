@@ -20,56 +20,56 @@ public class ResourceRestController {
     @Autowired
     private ResourceService resourceService;
 
-    @GetMapping("/description/{id}")
-    @PreAuthorize("permitAll()")
-    public ResponseEntity<String> getDescription(@PathVariable int id) {
-        Resource resourceDto = this.resourceService.get(id);
-        String description = resourceDto.getDescription();
-        return ResponseEntity.ok().body(description);
-    }
+//    @GetMapping("/description/{id}")
+//    @PreAuthorize("permitAll()")
+//    public ResponseEntity<String> getDescription(@PathVariable int id) {
+//        Resource resourceDto = this.resourceService.get(id);
+//        String description = resourceDto.getDescription();
+//        return ResponseEntity.ok().body(description);
+//    }
 
-    @GetMapping("/file/{id}")
-    @PreAuthorize("permitAll()")
-    public ResponseEntity<org.springframework.core.io.Resource> getFile(@PathVariable int id) {
-        Resource resourceDto = this.resourceService.get(id);
-        ByteArrayResource resource = new ByteArrayResource(resourceDto.getResource());
-        return ResponseEntity.ok()
-            .contentType(MediaType.APPLICATION_OCTET_STREAM)
-            .contentLength(resource.contentLength())
-            .body(resource);
-    }
+//    @GetMapping("/file/{id}")
+//    @PreAuthorize("permitAll()")
+//    public ResponseEntity<org.springframework.core.io.Resource> getFile(@PathVariable int id) {
+//        Resource resourceDto = this.resourceService.get(id);
+//        ByteArrayResource resource = new ByteArrayResource(resourceDto.getResource());
+//        return ResponseEntity.ok()
+//            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//            .contentLength(resource.contentLength())
+//            .body(resource);
+//    }
 
-    @PostMapping(consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasAnyRole('admin', 'leader', 'vice_leader', 'sub_leader', 'teacher')")
-    public ResponseEntity<String> create(@RequestParam("description") String description, @RequestParam("file") MultipartFile file) throws IOException {
-        Resource resource = new Resource();
-        byte[] resourceBytes = file.getBytes();
-        resource.setDescription(description);
-        resource.setResource(resourceBytes);
-        int generatedId = this.resourceService.create(resource);
-        String uri = String.format("/woorinaru/api/resource/file/%d", generatedId);
-        return ResponseEntity.created(URI.create(uri)).build();
-    }
+//    @PostMapping(consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+//    @PreAuthorize("hasAnyRole('admin', 'leader', 'vice_leader', 'sub_leader', 'teacher')")
+//    public ResponseEntity<String> create(@RequestParam("description") String description, @RequestParam("file") MultipartFile file) throws IOException {
+//        Resource resource = new Resource();
+//        byte[] resourceBytes = file.getBytes();
+//        resource.setDescription(description);
+//        resource.setResource(resourceBytes);
+//        int generatedId = this.resourceService.create(resource);
+//        String uri = String.format("/woorinaru/api/resource/file/%d", generatedId);
+//        return ResponseEntity.created(URI.create(uri)).build();
+//    }
 
-    @PutMapping(consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasAnyRole('admin', 'leader', 'vice_leader', 'sub_leader', 'teacher')")
-    public ResponseEntity<String> modify(@RequestParam("id") int id, @RequestParam("description") String description, @RequestParam("file") MultipartFile file) throws IOException {
-        Resource resource = new Resource();
-        String resourceDescription = new String(description.getBytes());
-        byte[] resourceBytes = file.getBytes();
-        resource.setId(id);
-        resource.setDescription(resourceDescription);
-        resource.setResource(resourceBytes);
-        this.resourceService.modify(resource);
-        return ResponseEntity.ok().build();
-    }
+//    @PutMapping(consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
+//    @PreAuthorize("hasAnyRole('admin', 'leader', 'vice_leader', 'sub_leader', 'teacher')")
+//    public ResponseEntity<String> modify(@RequestParam("id") int id, @RequestParam("description") String description, @RequestParam("file") MultipartFile file) throws IOException {
+//        Resource resource = new Resource();
+//        String resourceDescription = new String(description.getBytes());
+//        byte[] resourceBytes = file.getBytes();
+//        resource.setId(id);
+//        resource.setDescription(resourceDescription);
+//        resource.setResource(resourceBytes);
+//        this.resourceService.modify(resource);
+//        return ResponseEntity.ok().build();
+//    }
 
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('admin', 'leader')")
-    public ResponseEntity<String> delete(@PathVariable int id) {
-        Resource resource = new Resource();
-        resource.setId(id);
-        this.resourceService.delete(resource);
-        return ResponseEntity.ok().build();
-    }
+//    @DeleteMapping("/{id}")
+//    @PreAuthorize("hasAnyRole('admin', 'leader')")
+//    public ResponseEntity<String> delete(@PathVariable int id) {
+//        Resource resource = new Resource();
+//        resource.setId(id);
+//        this.resourceService.delete(resource);
+//        return ResponseEntity.ok().build();
+//    }
 }
